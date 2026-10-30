@@ -1,0 +1,1 @@
+package local.tv.quranidle;import android.content.*;public class BootReceiver extends BroadcastReceiver {public void onReceive(Context c,Intent i){if(c.getSharedPreferences("state",0).getBoolean("enabled",false))c.startForegroundService(new Intent(c,IdleService.class));}}

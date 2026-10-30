@@ -1,0 +1,12 @@
+[
+  {
+    "file": "adhan.mp3",
+    "url": "https://archive.org/download/azaan-of-world-mosques_202608/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%85%D9%84%D9%83%20%D8%A7%D9%84%D9%85%D9%84%D8%A7_%D9%85%D9%83%D8%A9%20%28www.alqurantranslation.com%29.mp3",
+    "sha256": "1e3848f59c883edf3fb7dbca23f0d66f1dfa2f5744fe62f0064539325dfce872"
+  },
+  {
+    "file": "fajr.mp3",
+    "url": "https://archive.org/download/azaan-of-world-mosques_202608/2nd%20Fajr%20Haram%20Makkah%20best.mp3",
+    "sha256": "7b35265c20774a8c376b5d6bcd47e0b2d8595a5883637bef38c4c46adb4b9181"
+  }
+]

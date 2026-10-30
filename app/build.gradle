@@ -1,0 +1,8 @@
+plugins { id 'com.android.application' }
+android {
+ namespace 'local.tv.quranidle'
+ compileSdk 34
+ defaultConfig { applicationId 'local.tv.quranidle'; minSdk 26; targetSdk 34; versionCode 3; versionName '1.2' }
+ buildTypes { release { signingConfig signingConfigs.debug } }
+ compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}

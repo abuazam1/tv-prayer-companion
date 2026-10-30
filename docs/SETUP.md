@@ -1,0 +1,50 @@
+# الإعداد والتجربة
+
+## البيئة المجربة
+
+Android TV14، شاشةTCL G08، وUrTV4.1 بناء168. تطبيق مستقل عن UrTV. الإحداثيات في النسخة الحالية لبريدة، وطريقة الصلاة أم القرى.
+
+## البناء
+
+1. ثبّتJDK17 وAndroid SDK platform34 وbuild-tools34.0.0.
+2. اضبطANDROID_HOME على مجلدSDK.
+3. شغّل `python scripts/download_audio.py`.
+4. شغّل `gradlew.bat assembleRelease` على ويندوز، أو `chmod +x gradlew && ./gradlew assembleRelease` على لينكس.
+5. ملفالتثبيت: `app/build/outputs/apk/release/app-release.apk`.
+
+المشروع يستخدم مفتاح Android التجريبي المحلي. احتفظ بمفتاحك محليًا إذا أردت إصدار تحديثات متوافقة مع تثبيتك، ولا ترفعه إلىGitHub.
+
+## التثبيت
+
+بعد إقرانADB، استبدلTV_SERIAL بعنوان الاتصال الحالي لجهازك:
+
+```bash
+adb -s TV_SERIAL install -r app/build/outputs/apk/release/app-release.apk
+adb -s TV_SERIAL shell appops set local.tv.quranidle SYSTEM_ALERT_WINDOW allow
+adb -s TV_SERIAL shell appops set local.tv.quranidle SCHEDULE_EXACT_ALARM allow
+```
+
+فيTCL فقط، إذا كانت العمليات التالية مدعومة:
+
+```bash
+adb -s TV_SERIAL shell appops set local.tv.quranidle AUTO_START allow
+adb -s TV_SERIAL shell appops set local.tv.quranidle ASSOC_START allow
+adb -s TV_SERIAL shell appops write-settings
+```
+
+افتح تطبيق «التلاوة وتنبيه الصلاة» واضغط «تفعيل». اضبط خمول شاشة توقفUrTV على30دقيقة، وأوقف أذانUrTV التلقائي كي لا يعمل أذانان معًا. افتح شاشة التطبيق واضغط «تفعيل» مجددًا بعد تحديثAPK علىTCL إذا لم تبقَ الخدمة مفعلة.
+
+## السلوك
+
+- التلاوة تبدأ عند شاشة التوقف الحقيقية؛ الحد الأعلى للصوت7، وتتوقف عند انتهائها.
+- الأذان يبدأ عند الصلاة بصوت7 حتى لو كان التلفزيون مكتومًا، ثم يستعيد الصوت والكتم السابقين. الملفات محلية بعد البناء.
+- رسالة «وقت الصلاة الآن» تغطي الشاشة بعد7دقائق من الصلاة، وتختفي بعد35دقيقة. ليست قفل جهاز.
+- إيقاف الخدمة من واجهتها يوقف الوظائف الثلاث معًا.
+
+## التحقق المنفذ
+
+نجح البناء والفحص الأساسي على الجهاز؛ اختُبر بدء التلاوة بالخمول الحقيقي وتوقفها عند العودة، وتشغيل الأذان بصوت7 في معاينة قصيرة، وظهور الرسالة واختفاؤها وجدول المنبهات. لم يُنتظر كامل35دقيقة ولم يُختبر فصل الكهرباء بعد آخر إصدار.
+
+## الإزالة
+
+أوقف التطبيق من واجهته ثم أزله من إعدادات أندرويد إن رغبت. UrTV مستقل ويبقى مثبتًا. إعادة تفعيل أذانUrTV تعيد حدوده الصوتية الرسمية التي تبدأ عند10بالمئة.
